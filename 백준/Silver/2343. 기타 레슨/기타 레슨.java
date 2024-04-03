@@ -1,39 +1,54 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-class Main
-{
-    public static boolean isPossible(int[] lengths, int videoLength, int videoCount) {
-        int currentLength = 0;
-        int currentCount = 1;
-        for (int len : lengths) {
-            if (len > videoLength) return false;
-            if (currentLength + len > videoLength) {
-                if (++currentCount > videoCount) return false;
-                currentLength = 0;
+
+public class Main {
+
+    static int parametric_search(int[] arr, int count){
+        int l = 0;
+        int n = arr.length;
+        int r = 10000 * n;
+        int res = -1;
+
+        while (l <= r){
+            int m = (l+r) / 2;
+
+            if (isAble(arr, m, count)){
+                res = m;
+                r = m-1;
             }
-            currentLength += len;
+
+            else l = m+1;
         }
-        return true;
+        return res;
     }
 
-    public static void main (String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int N = sc.nextInt();
-        int M = sc.nextInt();
-        int[] lengths = new int[N];
-        for (int i = 0; i < N; i++)
-            lengths[i] = sc.nextInt();
-
-        int l = 1, r = N * 10000, ans = -1;
-        while (l <= r) {
-            int m = (l + r) / 2;
-            if (isPossible(lengths, m, M)) {
-                ans = m;
-                r = m - 1;
+    static boolean isAble(int[] arr, int maxLen, int count){
+        int tmp = maxLen;
+        int cnt = 1;
+        for (int x : arr){
+            if (maxLen < x) return false;
+            if (tmp < x){
+                tmp = maxLen;
+                cnt++;
             }
-            else l = m + 1;
+            tmp -= x;
         }
-        System.out.println(ans);
+
+        return cnt <= count;
+    }
+
+
+    public static void main(String[] args) throws IOException {
+
+       Scanner in = new Scanner(System.in);
+       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = in.nextInt();
+        int m = in.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) arr[i] = in.nextInt();
+
+        System.out.print(parametric_search(arr, m));
     }
 }
