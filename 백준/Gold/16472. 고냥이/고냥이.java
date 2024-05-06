@@ -6,28 +6,29 @@ class Main
 {
     public static void main (String[] args) throws IOException {
         Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        String s = in.next();
-        char[] arr = new char[26];
-
-
-        int count = 0, rt = 0, ans = 0, len = 0;
-        for (int i = 0; i < s.length(); i++){
-            while (rt < s.length() && count <= n){
-                if (arr[s.charAt(rt) - 97] == 0){
-                    if (count < n) count++;
-                    else if (count == n) break;
+        int[] alphabet = new int[26];
+        int n = in.nextInt(), max = Integer.MIN_VALUE, cnt = 0, rt = 0, len = 0;
+        char[] arr = in.next().toCharArray();
+        for (int i = 0; i < arr.length; i++){
+            while (rt < arr.length && cnt <= n){
+                if (alphabet[arr[rt] - 97] == 0){
+                    if (cnt == n) break;
+                    else if (cnt < n) {
+                        cnt++;
+                    }
                 }
-                arr[s.charAt(rt++) - 97]++;
+                alphabet[arr[rt]-97] = alphabet[arr[rt]-97]+1;
+                rt++;
                 len++;
             }
 
-            ans = Math.max(ans, len);
-            arr[s.charAt(i) - 97]--;
+            max = Math.max(len, max);
+            alphabet[arr[i] - 97] = alphabet[arr[i]-97] - 1;
+            if (alphabet[arr[i]-97] == 0){
+                cnt--;
+            }
             len--;
-            if (arr[s.charAt(i) - 97] == 0) count--;
         }
-        System.out.println(ans);
-
+        System.out.println(max);
     }
 }
