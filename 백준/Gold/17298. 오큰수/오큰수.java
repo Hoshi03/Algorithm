@@ -23,7 +23,7 @@ public class Main {
         }
 
         StringBuilder sb = new StringBuilder();
-        for (int x : arr) sb.append(x).append(" ");
-        System.out.println(sb);
+        for (int x : arr) bw.write(x + " ");
+        bw.flush();
     }
 }
