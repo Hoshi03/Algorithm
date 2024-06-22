@@ -8,20 +8,19 @@ public class Main {
     static int[] arr;
     static int[] res;
 
-    static void dfs(int m, int count, int last){
+    static void dfs(int count){
         if (count >= m){
-            for (int x : res) {
-                System.out.print(x + " ");
-            }
-            System.out.println();
+            StringBuilder sb = new StringBuilder();
+            for (int x : res) sb.append(x).append(" ");
+            System.out.println(sb);
             return;
         }
 
         for (int x : arr){
-            if (x != last && !visited[x]){
+            if (!visited[x]){
                 visited[x] = true;
                 res[count] = x;
-                dfs(m, count + 1, x);
+                dfs(count + 1);
                 visited[x] = false;
             }
         }
@@ -35,6 +34,6 @@ public class Main {
         res = new int[m];
         for (int i = 0; i < n; i++) arr[i] = in.nextInt();
         Arrays.sort(arr);
-        dfs(m, 0, -1);
+        dfs(0);
     }
 }
