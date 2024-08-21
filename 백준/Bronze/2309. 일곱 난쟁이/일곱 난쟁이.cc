@@ -1,39 +1,36 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include "bits/stdc++.h"
+
 using namespace std;
 
+int main() {
 
-
-int main(void) {
-
-    int arr[9];
     int sum = 0;
+    vector<int> arr;
     for (int i = 0; i < 9; i++) {
-        int a;
-        cin >> a;
-        arr[i] = a;
-        sum = sum + a;
+        int tmp;
+        cin >> tmp;
+        arr.push_back(tmp);
+        sum += tmp;
     }
 
-    int tmp = 0;
-    int x1 = 0,x2 = 0;
+    bool find = false;
 
-    for (int i = 0; i < 9; i++) {
-        tmp = sum;
-        for (int j = i+1; j < 9; j++) {
-            int a = arr[i];
-            int b = arr[j];
-            if (tmp - (a + b) == 100) {
-                x1 = a;
-                x2 = b;
-                break;
+    for (int i = 0; i < arr.size(); i++) {
+        if (find) break;
+        for (int j = 1; j < arr.size(); j++) {
+            if (find) break;
+            if (sum - (arr[i]+arr[j]) == 100){
+                arr[i] = 0;
+                arr[j] = 0;
+                find = true;
             }
         }
     }
 
-    sort(arr,arr+9);
+    sort(arr.begin(), arr.end());
 
-    for (int i = 0; i < 9; i++) {
-        if (arr[i] == x1 || arr[i] == x2) continue;
-        cout << arr[i] << "\n";
+    for (int i = 2; i < 9; ++i) {
+        cout << arr[i] << '\n';
     }
 }
