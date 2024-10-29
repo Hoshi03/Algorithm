@@ -2,7 +2,7 @@
 
 using namespace std;
 int n, r, temp, root, res = 0;
-vector<int> adj[54];
+vector<int> adj[50];
 
 void dfs(int here) {
     //자식이 없거나, 자식이 하난데 r이면 리프 노드
