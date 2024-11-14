@@ -17,13 +17,13 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		string s;
 		cin >> s;
-		mmap[s] = 1;
+		mmap[s]++;
 	}
 
 	for (int i = 0; i < m; i++) {
 		string s;
 		cin >> s;
-		if (mmap[s] == 1) mmap2[s] = 1;
+		if (mmap[s]> 0) mmap2[s]++;
 	}
 
 
@@ -31,6 +31,4 @@ int main() {
 	for (auto x : mmap2) {
 		cout << x.first << '\n';
 	}
-
-
 }
