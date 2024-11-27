@@ -1,30 +1,21 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
-
-    public static int solution(String s1, String s2){
-
-        int cnt = 0;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        String s = br.readLine();
+        String target = br.readLine();
         int res = 0;
-
-        while (true){
-            int start = s1.indexOf(s2, cnt);
-
-            if (start < 0)  break;
-
-            else {
-                cnt = start + s2.length();
+        if (s.length() < target.length()) res = 0;
+        else {
+            while (s.contains(target)){
                 res++;
+                s = s.substring(s.indexOf(target)+target.length());
+
             }
         }
-        return res;
-    }
-
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-
-        String s1 = in.nextLine();
-        String s2 = in.nextLine();
-        System.out.println(solution(s1,s2));
+        System.out.println(res);
     }
 }
