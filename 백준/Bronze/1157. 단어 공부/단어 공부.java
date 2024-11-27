@@ -1,32 +1,31 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
-
-    public static char solution(String s1){
-        String s = s1.toUpperCase();
-        int[] arr = new int[26];
-        char res = 0;
-        int max = Integer.MIN_VALUE;
-
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        String s = br.readLine().toUpperCase();
+        int[] arr = new int[30];
         for (char x : s.toCharArray()){
-            arr[x - 'A'] += 1;
+            arr[x-65]++;
         }
 
+//        for (int x : arr) System.out.print(x + " ");;
+
+
+        int res = -1, cnt = 0, idx = 0;
+
         for (int i = 0; i < arr.length; i++){
-            if (arr[i] == max && max > 0) res = '?';
-            else if (arr[i] > max){
-                max = arr[i];
-                res = (char)(i + 'A');
+            if (res < arr[i]){
+                res = arr[i];
+                idx = i;
             }
         }
 
-        return res;
-    }
+        for (int x : arr) if (x == res) cnt++;
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-
-        String s1 = in.nextLine();
-        System.out.println(solution(s1));
+        if (cnt > 1) System.out.println('?');
+        else System.out.println((char) (idx + 65));
     }
 }
