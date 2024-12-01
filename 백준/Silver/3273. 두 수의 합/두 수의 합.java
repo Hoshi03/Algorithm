@@ -17,12 +17,8 @@ public class Main {
         while (lt < rt){
             int tmp = arr[lt]+arr[rt];
             if (tmp == target){
-                if (lt + 1 < rt)lt++;
-                else if (rt - 1 > lt) rt--;
-                else{
-                    rt++;
-                    lt++;
-                }
+                rt--;
+                lt++;
                 cnt++;
             }
             else if (tmp < target) lt++;
