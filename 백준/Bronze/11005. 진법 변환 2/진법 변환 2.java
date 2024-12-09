@@ -1,33 +1,23 @@
-import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
+import java.io.*;
 
-
-public class Main {
-
-    public static String solution(int a, int b)  {
-        String res = "";
-        StringBuilder sb = new StringBuilder(res);
-
-        while (a > 0){
-            int tmp = a % b;
-            a /= b;
-
-            if (tmp < 10) sb.append(tmp);
-            else sb.append((char)('A' + tmp - 10));
-        }
-
-
-        return sb.reverse().toString();
-
-    }
-
+class Main {
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
+        int n = Integer.parseInt(st.nextToken());
+        int b =  Integer.parseInt(st.nextToken());
+        while (n != 0){
+            int tmp = n % b;
+            if (tmp >= 10){
+                tmp += 55;
+                sb.append(Character.toChars(tmp));
+            }
 
-        Scanner in = new Scanner(System.in);
-
-        int a = in.nextInt();
-        int b = in.nextInt();
-        System.out.println(solution(a,b));
+            else sb.append(String.valueOf(tmp));
+            n /= b;
+        }
+        System.out.println(sb.reverse());
     }
 }
