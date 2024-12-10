@@ -1,0 +1,13 @@
+SELECT TO_CHAR(START_DATE,'FMMM') MONTH, CAR_ID, COUNT(CAR_ID) RECORDS
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY 
+WHERE CAR_ID IN(select car_id
+                from CAR_RENTAL_COMPANY_RENTAL_HISTORY 
+                WHERE TO_CHAR(START_DATE,'YYYY-MM') 
+                BETWEEN '2022-08' AND '2022-10'
+                GROUP BY CAR_ID
+                HAVING COUNT(car_id) >= 5)
+AND  
+TO_CHAR(START_DATE, 'YYYY-MM-DD') BETWEEN '2022-08-01' AND '2022-10-31'
+group by to_char(start_date, 'FMMM'), car_id
+Having count(*) <> 0
+ORDER BY TO_NUMBER(TO_CHAR(START_DATE, 'FMMM')), CAR_ID DESC;
