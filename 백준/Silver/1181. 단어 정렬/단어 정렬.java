@@ -15,13 +15,13 @@ public class Main {
 
         for (String x : set) arr.add(x);
 
-        arr.sort((a, b) -> {
+        Collections.sort(arr, ((a, b) -> {
             if (a.length() == b.length()) {
                 return a.compareTo(b);
             } else {
                 return a.length() - b.length();
             }
-        });
+        }));
 
         for (String x : arr){
             sb.append(x).append('\n');
