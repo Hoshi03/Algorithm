@@ -1,39 +1,42 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
-class Person implements Comparable<Person>{
+class People {
     int age;
     String name;
+    int idx;
 
-    Person(int age, String name){
-        this.name = name;
+    public People(int age, String name, int idx){
         this.age = age;
-    }
-
-    @Override
-    public int compareTo(Person o) {
-        return  age - o.age;
+        this.name = name;
+        this.idx = idx;
     }
 }
 
-
 public class Main {
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int n = Integer.parseInt(br.readLine());
+        ArrayList<People> arr = new ArrayList<>();
+        for (int i = 1; i <= n; i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int age = Integer.parseInt(st.nextToken());
+            String name = st.nextToken();
+            arr.add(new People(age, name, i));
+        }
+        arr.sort((a, b) ->{
+            if (a.age == b.age){
+                return a.idx - b.idx;
+            }
 
-    public static void solution(char[][] arr, String s)  {
+            else {
+                return a.age - b.age;
+            }
+        });
 
-    }
-
-    public static void main(String[] args) throws IOException {
-
-        Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        ArrayList<Person> arr = new ArrayList<>();
-
-        for (int i = 0; i < n; i++) arr.add(new Person(in.nextInt(), in.nextLine()));
-
-
-        Collections.sort(arr);
-
-        for (Person x : arr) System.out.println(x.age + "" + x.name);
+        for (People x : arr){
+            System.out.println(x.age + " " + x.name);
+        }
     }
 }
