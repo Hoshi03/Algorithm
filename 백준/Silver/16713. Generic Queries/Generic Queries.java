@@ -25,7 +25,11 @@ public class Main {
         for (int i = 0; i < m; i++){
             int start = in.nextInt();
             int end = in.nextInt();
-            tmp[i] = sum[end] ^ sum[start-1];
+            if (start == end) {
+                tmp[i] = arr[start];
+            } else {
+                tmp[i] = sum[end] ^ sum[start - 1];
+            }
         }
 
         int res = tmp[0];
